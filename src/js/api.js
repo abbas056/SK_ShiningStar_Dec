@@ -45,16 +45,16 @@ function EventProvider({ children }) {
 
   useEffect(() => {
     try {
-      // window.phone.getUserInfo(function (userInfo) {
-      //   setUser({
-      //     uid: userInfo.userId > 0 ? userInfo.userId : 0,
-      //     token: userInfo.token !== "" ? userInfo.token : null,
-      //   });
-      // });
-      setUser({
-        uid: 596492375,
-        token: "A1417DF32CD5234DCCADA230762EB713CF",
+      window.phone.getUserInfo(function (userInfo) {
+        setUser({
+          uid: userInfo.userId > 0 ? userInfo.userId : 0,
+          token: userInfo.token !== "" ? userInfo.token : null,
+        });
       });
+      // setUser({
+      //   uid: 596492375,
+      //   token: "A1417DF32CD5234DCCADA230762EB713CF",
+      // });
     } catch (_error) {
       setUser({
         uid: 0,
@@ -146,39 +146,45 @@ function EventProvider({ children }) {
 
   useEffect(() => {
     setIsLoading(true);
-    axios
-      .get(`https://api-gateway-dev-sk.mikktv.xyz/api/actor/shining/star/leaderboard/getShiningStarRankingList?date=${CurrentDate}`, {
-        headers: {
-          userId: `${user.uid}`,
-        },
-      })
-      .then((response) => {
-        setToday(response.data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsLoading(false); // Ensure loading state is handled even on error
-      });
-  }, [user, refresh]);
+    if (user?.uid && CurrentDate) {
+      axios
+        .get(`https://api.kktv9.com/api/actor/shining/star/leaderboard/getShiningStarRankingList?date=${CurrentDate}`, {
+          headers: {
+            "Content-Type": "application/json",
+            userId: user?.uid,
+          },
+        })
+        .then((response) => {
+          setToday(response.data);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.error("Error:", err);
+          setIsLoading(false);
+        });
+    }
+  }, [user, user?.uid, refresh, CurrentDate]);
 
   useEffect(() => {
     setIsLoading(true);
-    axios
-      .get(`https://api-gateway-dev-sk.mikktv.xyz/api/actor/shining/star/leaderboard/getShiningStarRankingList?date=${PreviousDate}`, {
-        headers: {
-          userId: `${user.uid}`,
-        },
-      })
-      .then((response) => {
-        setYesterday(response.data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsLoading(false); // Ensure loading state is handled even on error
-      });
-  }, [user, refresh]);
+    if (user?.uid && PreviousDate) {
+      axios
+        .get(`https://api.kktv9.com/api/actor/shining/star/leaderboard/getShiningStarRankingList?date=${PreviousDate}`, {
+          headers: {
+            "Content-Type": "application/json",
+            userId: user?.uid,
+          },
+        })
+        .then((response) => {
+          setYesterday(response.data);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.error("Error:", err);
+          setIsLoading(false);
+        });
+    }
+  }, [user, user?.uid, refresh, PreviousDate]);
 
   return (
     <div>

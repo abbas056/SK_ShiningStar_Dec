@@ -97,6 +97,8 @@ function GuideContent({ guide, close, language }) {
                 {current.desc10}
                 {current.heading11}
                 {current.desc11}
+                {current.heading12}
+                {current.desc12}
               </div>
             </div>
           </div>

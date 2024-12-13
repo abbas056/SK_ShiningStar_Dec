@@ -300,6 +300,16 @@ export var guideContent = {
         <li>The top 3 talents will win overall rewards.</li>
       </ul>
     ),
+    heading12: <h1 className="h1">Note:</h1>,
+
+    desc12: (
+      <ul>
+        <li>
+          Any talent on the leaderboard found to be flouting the rules and guidelines of the platform, he/she will not be eligible for rewards. This
+          also includes changing of gender for benefits.
+        </li>
+      </ul>
+    ),
   },
 
   Urdu: {
@@ -440,6 +450,16 @@ export var guideContent = {
       <ul>
         <li>Top 2 talents ko every hour ke liye room icon pe dikhaya jayega upcoming hour ke liye. </li>
         <li>Top 3 talents ko overall rewards mil sakte hai.</li>
+      </ul>
+    ),
+    heading12: <h1 className="h1">Note:</h1>,
+
+    desc12: (
+      <ul>
+        <li>
+          Leaderboard pe aya hua jo bhi talent, humare platform ki guidelines ko follow nahi karta, toh use rewards nahi diye jayenge. Isme extra
+          benefits ke liye gender change karna bhi shaamil hai.
+        </li>
       </ul>
     ),
   },
